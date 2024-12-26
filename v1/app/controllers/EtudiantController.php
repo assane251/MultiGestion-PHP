@@ -1,0 +1,74 @@
+<?php
+
+require_once __DIR__ . '/../models/Etudiant.php';
+
+/**
+ * Controller qui affiche la liste des étudiants
+ * @return void
+ */
+function listEtudiantsController()
+{
+    $etudiants = getAllStudents();
+    require_once  __DIR__ . '/../views/etudiants/show.php';
+}
+
+
+/**
+ * Controller qui affiche le formulaire de création d'un étudiant
+ * @return void
+ */
+function addEtudiantController()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!empty($_POST)) {
+            extract($_POST);
+            createStudent($nom, $prenom, $email, $filiere);
+
+            require_once  __DIR__. '/../views/etudiants/create.php';
+        }
+    } else {
+        require_once  __DIR__. '/../views/etudiants/create.php';
+    }
+}
+
+
+/**
+ * Controller qui affiche le formulaire de modification d'un étudiant
+ * @param $id int id de l'étudiant
+ * @return void
+ */
+function editEtudiantController()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $etudiant = getStudentById($id);
+            require_once  __DIR__. '/../views/etudiants/edit.php';
+        }
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!empty($_POST)) {
+
+            extract($_POST);
+            updateStudent($id, $nom, $prenom, $email, $filiere);
+
+            header('Location: index.php?controller=equipement&action=listEtudiantsController');
+
+            require_once  __DIR__. '/../views/etudiants/edit.php';
+        }
+    }
+}
+
+/**
+ * Controller qui supprime un étudiant
+ * @param $id int id de l'étudiant
+ * @return void
+ */
+function deleteEtudiantController()
+{
+    $id = isset($_GET['id'])? $_GET['id'] : null;
+
+    if ($id) {
+        deleteStudent($id);
+        header('Location: index.php?controller=equipement&action=listEtudiantsController');
+    }
+}
