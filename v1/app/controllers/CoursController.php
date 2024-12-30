@@ -7,9 +7,9 @@ require_once __DIR__ . '/../models/Cours.php';
  * Controller qui affiche la liste des animal
  * @return void
  */
-function listCoursesController()
+function listCoursController()
 {
-    $courses = getAllCourses();
+    $courses = listerTousLesCours();
     require_once  __DIR__ . '/../views/cours/show.php';
 }
 
@@ -18,12 +18,12 @@ function listCoursesController()
  * Controller qui affiche le formulaire d'ajout d'un animal
  * @return void
  */
-function addCourseController()
+function ajouterCoursController()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST)) {
             extract($_POST);
-            createCourse($nom_cours, $nombre_heure);
+            ajouterCours($nom_cours, $nombre_heure);
 
             require_once  __DIR__. '/../views/cours/create.php';
         }
@@ -38,21 +38,21 @@ function addCourseController()
  * @param $id int id du animal
  * @return void
  */
-function editCourseController()
+function modifierCoursController()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $course = getCourseById($id);
+            $course = recupererCoursParId($id);
             require_once  __DIR__ . '/../views/cours/edit.php';
         }
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST)) {
 
             extract($_POST);
-            updateCourse($id, $nom_cours, $nombre_heure);
+            modifierCours($id, $nom_cours, $nombre_heure);
 
-            header('Location: index.php?controller=animal&action=listCoursesController');
+            header('Location: index.php?controller=cours&action=listCoursController');
 
             require_once  __DIR__. '/../views/cours/edit.php';
         }
@@ -64,12 +64,12 @@ function editCourseController()
  * @param $id int id du animal
  * @return void
  */
-function deleteCourseController()
+function supprimerCoursController()
 {
     $id = isset($_GET['id']) ? $_GET['id'] : null;
 
     if ($id) {
-        deleteCourse($id);
-        header('Location: index.php?controller=animal&action=listCoursesController');
+        supprimerCoursParId($id);
+        header('Location: index.php?controller=cours&action=listCoursController');
     }
 }

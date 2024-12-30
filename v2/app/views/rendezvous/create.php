@@ -1,11 +1,11 @@
 <h1>Ajouter un rendez-vous</h1>
 
-<form method="post" action="?controller=rendezvous&action=addRendezvousController">
+<form method="post" action="?controller=rendezvous&action=ajouterRendezvousController">
     <label for="date">Date rendez-vous:</label>
     <input type="date" id="date" name="date" required>
 
-    <label for="hours">Heure:</label>
-    <input type="time" id="hours" name="hours" required>
+    <label for="heure">Heure:</label>
+    <input type="time" id="heure" name="heure" required>
 
     <label for="description"></label>
     <textarea id="description" name="description" required></textarea>
@@ -14,7 +14,7 @@
     <select id="client_id" name="client_id" required>
         <option value="">Selectionnez un client</option>
         <?php foreach ($clients as $client):?>
-            <option value="<?php echo $client['id'];?>"><?php echo $client['name'];?></option>
+            <option value="<?php echo $client['id'];?>"><?php echo $client['nom'];?></option>
         <?php endforeach;?>
     </select>
 

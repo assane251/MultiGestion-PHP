@@ -3,13 +3,13 @@
 class Database
 {
     private static $instance = null;
-    public $db;
-    private $serveur = "localhost";
-    private $port = "5432";
-    private $user = "postgres";
-    private $pwd = "Assane45678";
-    private $dbname = "db-php-v2";
-    private $dsn;
+    public PDO $db;
+    private string $serveur = "localhost";
+    private string $port = "5432";
+    private string $user = "postgres";
+    private string $pwd = "Assane45678";
+    private string $dbname = "db_php_v2";
+    private string $dsn;
     private $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

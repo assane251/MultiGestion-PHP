@@ -1,86 +1,82 @@
 <?php
 
-class RendezVous extends Equipement
+require_once __DIR__ . '/Client.php';
+
+class RendezVous extends Client
 {
-    private $id;
-    private $date;
-    private $hours;
-    private $description;
-    private $client_id;
-    private $db;
+    private int $id;
+    private string $date;
+    private string $heure;
+    private string $description;
+    private string $client_id;
 
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
     }
 
-    public function setHours($hours)
+    public function setHeure($heure): void
     {
-        $this->hours = $hours;
+        $this->heure = $heure;
     }
 
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
 
-    public function setClient_id($client_id)
+    public function setClient_id($client_id): void
     {
         $this->client_id = $client_id;
     }
 
-    public function getAllRendezvous()
+    public function listTousLesRendezvous()
     {
-        $query = "SELECT * FROM animal";
+        $query = "SELECT * FROM rendezvous";
         return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRendezvousById($id)
+    public function recupererendezvousParId($id)
     {
-        $query = "SELECT * FROM animal WHERE id = :id";
+        $query = "SELECT * FROM rendezvous WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addRendezvous()
+    public function ajouterRendezvous()
     {
-        $query = "INSERT INTO animal (date, hours, description, client_id) VALUES (:date, :hours, :description, :client_id)";
+        $query = "INSERT INTO rendezvous (date, heure, description, client_id) VALUES (:date, :heure, :description, :client_id)";
         $stmt = $this->db->prepare($query);
         $stmt->execute([
             'date' => $this->date,
-            'hours' => $this->hours,
+            'heure' => $this->heure,
             'description' => $this->description,
             'client_id' => $this->client_id
         ]);
     }
 
-    public function updateRendezvous()
+    public function modifierRendezvous()
     {
-        $query = "UPDATE animal SET date = :date, hours = :hours, description = :description, client_id = :client_id WHERE id = :id";
+        $query = "UPDATE rendezvous SET date = :date, heure = :heure, description = :description, client_id = :client_id WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute([
             'id' => $this->id,
             'date' => $this->date,
-            'hours' => $this->hours,
+            'heure' => $this->heure,
             'description' => $this->description,
             'client_id' => $this->client_id
         ]);
     }
 
-    public function deleteRendezvous($id)
+    public function supprimerRendezvous($id)
     {
-        $query = "DELETE FROM animal WHERE id = :id";
+        $query = "DELETE FROM rendezvous WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute(['id' => $id]);
     }

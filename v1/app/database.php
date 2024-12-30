@@ -4,7 +4,7 @@ $serveur = "localhost";
 $port = "5432";
 $user = "postgres";
 $pwd = "Assane45678";
-$dbname = "db-php-v1";
+$dbname = "db_php_v1";
 
 $db = pg_connect("host=$serveur port=$port dbname=$dbname user=$user password=$pwd");
 

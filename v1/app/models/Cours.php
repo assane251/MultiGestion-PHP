@@ -3,13 +3,13 @@
 require_once __DIR__ . '/../database.php';
 
 /**
- * cette methode permet de recuperer la liste de des animal
+ * cette methode permet de recuperer la liste de des cours
  * @return returne une liste des animal
  */
-function getAllCourses(): array
+function listerTousLesCours(): array
 {
     global $db;
-    $result = pg_query($db, "SELECT * FROM animal");
+    $result = pg_query($db, "SELECT * FROM cours");
     if (!$result)
         die("Erreur lors de la récupération des animal : " . pg_last_error());
     return pg_fetch_all($result, PGSQL_ASSOC);
@@ -17,14 +17,14 @@ function getAllCourses(): array
 
 
 /**
- * cette methode permet de recuperer un animal par son id
- * @param $id int id du animal
+ * cette methode permet de recuperer un cours par son id
+ * @param $id int id du cours
  * @return returne un animal par son id
  */
-function getCourseById($id): array
+function recupererCoursParId($id): array
 {
     global $db;
-    $result = pg_query($db, "SELECT * FROM animal WHERE id=$id");
+    $result = pg_query($db, "SELECT * FROM cours WHERE id=$id");
     if (!$result)
         die("Erreur lors de la récupération du animal : " . pg_last_error());
     return pg_fetch_assoc($result);
@@ -32,16 +32,16 @@ function getCourseById($id): array
 
 
 /**
- * cette methode permet de creer un nouveau animal
- * @param $titre string titre du animal
- * @param $nom_cours string nom du animal
- * @param $nom_nom_cours int nombre du animal
+ * cette methode permet de creer un nouveau cours
+ * @param $titre string titre du cours
+ * @param $nom_cours string nom du cours
+ * @param $nom_nom_cours int nombre du cours
  * @return void
  */
-function createCourse($nom_cours, $nombre_heure)
+function ajouterCours($nom_cours, $nombre_heure)
 {
     global $db;
-    $result = pg_query($db, "INSERT INTO animal (nom_cours, nombre_heure) VALUES ('$nom_cours', $nombre_heure)");
+    $result = pg_query($db, "INSERT INTO cours (nom_cours, nombre_heure) VALUES ('$nom_cours', $nombre_heure)");
     if (!$result)
         die("Erreur lors de la création du animal : " . pg_last_error());
 }
@@ -49,28 +49,28 @@ function createCourse($nom_cours, $nombre_heure)
 
 /**
  * cette methode permet de modifier un animal existant
- * @param $id int id du animal
- * @param $nom_cours string nom du animal
- * @param $nombre_heure int nombre du animal
+ * @param $id int id du cours
+ * @param $nom_cours string nom du cours
+ * @param $nombre_heure int nombre du cours
  * @return void retourne rien
  */
-function updateCourse($id, $nom_cours, $nombre_heure)
+function modifierCours($id, $nom_cours, $nombre_heure)
 {
     global $db;
-    $result = pg_query($db, "UPDATE animal SET nom_cours='$nom_cours', nombre_heure=$nombre_heure WHERE id=$id");
+    $result = pg_query($db, "UPDATE cours SET nom_cours='$nom_cours', nombre_heure=$nombre_heure WHERE id=$id");
     if (!$result)
         die("Erreur lors de la modification du animal : " . pg_last_error());
 }
 
 /**
- * cette methode permet de supprimer un animal existant
- * @param $id int id du animal
+ * cette methode permet de supprimer un cours existant
+ * @param $id int id du cours
  * @return void retourne rien
  */
-function deleteCourse($id)
+function supprimerCoursParId($id)
 {
     global $db;
-    $result = pg_query($db, "DELETE FROM animal WHERE id=$id");
+    $result = pg_query($db, "DELETE FROM cours WHERE id=$id");
     if (!$result)
         die("Erreur lors de la suppression du animal : " . pg_last_error());
 }

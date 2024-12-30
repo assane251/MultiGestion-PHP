@@ -6,7 +6,7 @@ require_once __DIR__ . '/../database.php';
  * cette methode permet de recuperer la liste de des equipement
  * @return returne une liste des equipement
  */
-function getAllStudents(): array
+function listerTousLesEtudiant(): array
 {
     global $db;
     $result = pg_query($db, "SELECT * FROM etudiant");
@@ -21,7 +21,7 @@ function getAllStudents(): array
  * @param $id int id de l'etudiant
  * @return returne un etudiant par son id
  */
-function getStudentById($id): array
+function recupererEtudiantParId($id): array
 {
     global $db;
     $result = pg_query($db, "SELECT * FROM etudiant WHERE id=$id");
@@ -39,7 +39,7 @@ function getStudentById($id): array
  * @param $filiere string filiere de l'etudiant
  * @return void
  */
-function createStudent($nom, $prenom, $email, $filiere)
+function ajouterEtudiant($nom, $prenom, $email, $filiere)
 {
     global $db;
     $result = pg_query($db, "INSERT INTO etudiant (nom, prenom, email, filiere) VALUES ('$nom', '$prenom', '$email', '$filiere')");
@@ -54,7 +54,7 @@ function createStudent($nom, $prenom, $email, $filiere)
  * @param $nom string nom de l'etudiant
  * @return void
  */
-function updateStudent($id, $nom, $prenom, $email, $filiere)
+function modifierEtuiant($id, $nom, $prenom, $email, $filiere)
 {
     global $db;
     $result = pg_query($db, "UPDATE etudiant SET nom='$nom', prenom='$prenom', email='$email', filiere='$filiere' WHERE id=$id");
@@ -67,7 +67,7 @@ function updateStudent($id, $nom, $prenom, $email, $filiere)
  * @param $id int id de l'etudiant
  * @return void
  */
-function deleteStudent($id)
+function supprimerEtudiantParId($id)
 {
     global $db;
     $result = pg_query($db, "DELETE FROM etudiant WHERE id=$id");

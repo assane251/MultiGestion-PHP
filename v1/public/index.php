@@ -3,22 +3,26 @@
 require_once "../app/controllers/CoursController.php";
 require_once "../app/controllers/EtudiantController.php";
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'equipement';
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'etudiant';
 $action = isset($_GET['action']) ? $_GET['action'] : 'listEtudiantsController';
 
 switch ($controller) {
-    case 'animal':
+    case 'cours':
         require_once '../app/controllers/CoursController.php';
         break;
-    case 'equipement':
+    case 'etudiant':
         require_once '../app/controllers/EtudiantController.php';
         break;
     default:
-        die("Le contrôleur '$controller' n'existe pas.");
+        http_response_code(404);
+        include('404.php');
+        exit;
 }
 
 if (function_exists($action)) {
     $action();
-} else{
-    die("L'action '$action' n'existe pas dans le contrôleur '$controller'.");
+} else {
+    http_response_code(404);
+    include('404.php');
+    exit;
 }

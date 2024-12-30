@@ -6,66 +6,66 @@ require_once __DIR__ . '/../models/Client.php';
 
 class RendezVousController
 {
-    private $rendezvousModel;
-    private $clientModel;
+    private RendezVous $rendezvousModel;
+    private Client $clientModel;
 
     public function __construct()
     {
-        $this->rendezvousModel = new Animaux(Database::getInstance());
-        $this->clientModel = new Equipement(Database::getInstance());
+        $this->rendezvousModel = new RendezVous(Database::getInstance());
+        $this->clientModel = new Client(Database::getInstance());
     }
 
     public function listRendezvousController()
     {
-        $rendezvous = $this->rendezvousModel->getAllRendezvous();
+        $rendezvous = $this->rendezvousModel->listTousLesRendezvous();
         require_once __DIR__ . '/../views/rendezvous/show.php';
     }
 
-    public function addRendezvousController()
+    public function ajouterRendezvousController()
     {
-        $clients = $this->clientModel->getAllClients();
+        $clients = $this->clientModel->listTousLesClients();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->rendezvousModel->setType($_POST['date']);
-            $this->rendezvousModel->setAge($_POST['hours']);
+            $this->rendezvousModel->setDate($_POST['date']);
+            $this->rendezvousModel->setHeure($_POST['heure']);
             $this->rendezvousModel->setDescription($_POST['description']);
-            $this->rendezvousModel->setEquipement_id($_POST['client_id']);
-            $this->rendezvousModel->addRendezvous();
+            $this->rendezvousModel->setClient_id($_POST['client_id']);
+            $this->rendezvousModel->ajouterRendezvous();
 
-            header('Location: index.php?controller=animal&action=listRendezvousController');
+            header('Location: index.php?controller=rendezvous&action=listRendezvousController');
             exit;
         }
         require_once __DIR__ . '/../views/rendezvous/create.php';
     }
 
-    public function editRendezvousController()
+    public function modifierRendezvousController()
     {
-        $clients = $this->clientModel->getAllClients();
+        $clients = $this->clientModel->listTousLesClients();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->rendezvousModel->setId($_POST['id']);
-            $this->rendezvousModel->setType($_POST['date']);
-            $this->rendezvousModel->setAge($_POST['hours']);
+            $this->rendezvousModel->setDate($_POST['date']);
+            $this->rendezvousModel->setHeure($_POST['heure']);
             $this->rendezvousModel->setDescription($_POST['description']);
-            $this->rendezvousModel->setEquipement_id($_POST['client_id']);
-            $this->rendezvousModel->updateRendezvous();
+            $this->rendezvousModel->setClient_id($_POST['client_id']);
+            $this->rendezvousModel->modifierRendezvous();
 
-            header('Location: index.php?controller=animal&action=listRendezvousController');
+            header('Location: index.php?controller=rendezvous&action=listRendezvousController');
             exit;
         } else {
             $id = $_GET['id'] ?? null;
-            $rendezvous = $this->rendezvousModel->getRendezvousById($id);
+            $rendezvous = $this->rendezvousModel->recupererendezvousParId($id);
             require_once __DIR__ . '/../views/rendezvous/edit.php';
         }
     }
 
-    public function deleteRendezvousController()
+    public function supprimerRendezvousController()
     {
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            $this->rendezvousModel->deleteRendezvous($id);
-            header('Location: index.php?controller=animal&action=listRendezvousController');
+            $this->rendezvousModel->supprimerRendezvous($id);
+            header('Location: index.php?controller=rendezvous&action=listRendezvousController');
             exit;
         }
     }
