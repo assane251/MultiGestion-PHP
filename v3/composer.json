@@ -1,0 +1,39 @@
+{
+    "name": "al-hassane-diallo/v3",
+    "require": {
+        "doctrine/orm": "^3.3",
+        "doctrine/dbal": "^4.2",
+        "symfony/cache": "^7.0",
+        "twig/twig": "^3.0",
+        "symfony/framework-bundle": "^7.2"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-0": {"": "app/"},
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+
+    "config": {
+        "bin-dir": "vendor/bin"
+    },
+
+    "authors": [
+        {
+            "name": "Al Hassane DIALLO",
+            "email": "assanedialloisidk@groupeisi.com"
+        }
+    ],
+
+    "post-install-cmd": [
+        "Doctrine\\ORM\\Tools\\Console\\ConsoleRunner::createHelperSet"
+    ],
+
+    "post-update-cmd": [
+        "Doctrine\\ORM\\Tools\\Console\\ConsoleRunner::createHelperSet"
+    ]
+}
