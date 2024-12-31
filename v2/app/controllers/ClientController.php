@@ -5,27 +5,28 @@ require_once __DIR__ . '/../models/Client.php';
 
 class ClientController
 {
-    private $clientModel;
+    private Client $clientModel;
 
     public function __construct()
     {
-        $this->clientModel = new Equipement(Database::getInstance());
+        $this->clientModel = new Client(Database::getInstance());
     }
 
     public function listClientsController()
     {
-        $clients = $this->clientModel->getAllClients();
+        $clients = $this->clientModel->listTousLesClients();
         require_once __DIR__ . '/../views/clients/show.php';
     }
 
-    public function addClientController()
+    public function ajouterClientController()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST)) {
-                $this->clientModel->setNom($_POST['name']);
-                $this->clientModel->setEtat($_POST['email']);
-                $this->clientModel->setDisponible($_POST['phone']);
-                $this->clientModel->addClient();
+                $this->clientModel->setNom($_POST['nom']);
+                $this->clientModel->setPrenom($_POST['prenom']);
+                $this->clientModel->setEmail($_POST['email']);
+                $this->clientModel->setTelephone($_POST['telephone']);
+                $this->clientModel->ajouterClient();
 
                 header('Location: ?controller=client&action=listClientsController');
                 exit;
@@ -35,32 +36,33 @@ class ClientController
         }
     }
 
-    public function editClientController()
+    public function modifierClientController()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST)) {
                 $this->clientModel->setId($_POST['id']);
-                $this->clientModel->setNom($_POST['name']);
-                $this->clientModel->setEtat($_POST['email']);
-                $this->clientModel->setDisponible($_POST['phone']);
-                $this->clientModel->updateClient();
+                $this->clientModel->setNom($_POST['nom']);
+                $this->clientModel->setPrenom($_POST['prenom']);
+                $this->clientModel->setEmail($_POST['email']);
+                $this->clientModel->setTelephone($_POST['telephone']);
+                $this->clientModel->modifierClient();
 
                 header('Location: ?controller=client&action=listClientsController');
                 exit;
             }
         } else {
             $id = $_GET['id'] ?? null;
-            $client = $this->clientModel->getClientById($id);
+            $client = $this->clientModel->recupererClientParId($id);
             require_once __DIR__ . '/../views/clients/edit.php';
         }
     }
 
-    public function deleteClientController()
+    public function supprimerClientController()
     {
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            $this->clientModel->deleteClient($id);
+            $this->clientModel->supprimerClient($id);
             header('Location: ?controller=client&action=listClientsController');
             exit;
         }

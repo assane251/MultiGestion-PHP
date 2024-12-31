@@ -1,45 +1,51 @@
 <?php
 
-require_once "../app/controllers/AnimalController.php";
-require_once "../app/controllers/EquipementController.php";
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/config/bootstap.php';
 
-use AlHassane\MultiGestionPHP\Controllers\AnimalController;
+use App\Config\Bootstrap;
+use App\Controllers\AnimalController;
+use App\Controllers\EquipementController;
+use App\Repository\AnimalRepository;
+use App\Repository\EquipementRepository;
 
-// Exécution d'une action dans le contrôleur, en capturant les erreurs
+// Obtenir l'EntityManager
+$entityManager = (new Bootstrap())::getEntityManager();
+
+// Déterminer le contrôleur et l'action à partir des paramètres GET
+$controllerName = $_GET['controller'] ?? 'animal';
+$action = $_GET['action'] ?? 'index';
+$id = $_GET['id'] ?? null;
+
 try {
-    // Assurez-vous que vous appelez la méthode qui fait une interaction avec la base
-    $animalController = new AnimalController();
-    $animalController->index();  // Remplacez par votre méthode spécifique
+    switch ($controllerName) {
+        case 'animal':
+            $animalRepository = new AnimalRepository($entityManager);
+            $animalController = new AnimalController($animalRepository);
 
-} catch (\Doctrine\DBAL\Exception $e) {
-    echo "Database error: " . $e->getMessage();
-    // Vous pouvez aussi loguer l'erreur ici pour mieux la suivre
-} catch (\Exception $e) {
-    echo "An error occurred: " . $e->getMessage();
+            if (method_exists($animalController, $action)) {
+                $animalController->$action($id);
+            } else {
+                throw new Exception("Action non trouvée : $action");
+            }
+            break;
+
+        case 'equipement':
+            $equipementRepository = new EquipementRepository($entityManager);
+            $equipementController = new EquipementController($equipementRepository);
+
+            if (method_exists($equipementController, $action)) {
+                $equipementController->$action($id);
+            } else {
+                throw new Exception("Action non trouvée : $action");
+            }
+            break;
+
+        default:
+            http_response_code(404);
+            echo "Page introuvable.";
+            break;
+    }
+} catch (Exception $e) {
+    http_response_code(500);
+    echo "Erreur : " . $e->getMessage();
 }
-
-//$controller = isset($_GET['controller']) ? $_GET['controller'] : 'equipement';
-//$action = isset($_GET['action']) ? $_GET['action'] : 'listClientsController';
-
-//switch ($controller) {
-//    case 'animal':
-//        $rendezvousController = new AnimalController();
-//        if (method_exists($rendezvousController, $action)) {
-//            $rendezvousController->$action();
-//        } else {
-//            die("L'action '$action' n'existe pas.");
-//        }
-//        break;
-//    case 'client':
-//        $clientController = new EquipementController();
-//        if (method_exists($clientController, $action)) {
-//            $clientController->$action();
-//        } else {
-//            die("L'action '$action' n'existe pas.");
-//        }
-//        break;
-//    default:
-//        die("Le contrôleur '$controller' n'existe pas.");
-//}

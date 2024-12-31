@@ -23,7 +23,7 @@ function ajouterCoursController()
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST)) {
             extract($_POST);
-            ajouterCours($nom_cours, $nombre_heure);
+            ajouterCours($nom_cours, $code_cours, $nombre_heure);
 
             require_once  __DIR__. '/../views/cours/create.php';
         }
@@ -50,7 +50,7 @@ function modifierCoursController()
         if (!empty($_POST)) {
 
             extract($_POST);
-            modifierCours($id, $nom_cours, $nombre_heure);
+            modifierCours($id, $nom_cours, $code_cours, $nombre_heure);
 
             header('Location: index.php?controller=cours&action=listCoursController');
 

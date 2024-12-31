@@ -1,42 +1,49 @@
 <?php
+
 class Client
 {
-    private $id;
-    private $name;
-    private $email;
-    private $phone;
-    private $db;
+    private int $id;
+    private string $nom;
+    private string $prenom;
+    private string $email;
+    private string $telephone;
+    protected PDO $db;
 
     public function __construct(PDO $db)
     {
         $this->db = $db;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function setName($name)
+    public function setNom($nom): void
     {
-        $this->name = $name;
+        $this->nom = $nom;
     }
 
-    public function setEmail($email)
+    public function setPrenom($prenom): void
+    {
+        $this->prenom = $prenom;
+    }
+
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
 
-    public function setPhone($phone)
+    public function setTelephone($telephone): void
     {
-        $this->phone = $phone;
+        $this->telephone = $telephone;
     }
 
     /**
      * cette methode permet de recuperer tous les equipement
      * @return array tous les equipement
      */
-    public function getAllClients()
+    public function listTousLesClients(): array
     {
         $query = "SELECT * FROM client";
         return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
@@ -44,16 +51,17 @@ class Client
 
     /**
      * cette methode permet d'ajouter un client
-     * @return void]
+     * @return void
      */
-    public function addClient()
+    public function ajouterClient(): void
     {
-        $query = "INSERT INTO client (name, email, phone) VALUES (:name, :email, :phone)";
+        $query = "INSERT INTO client (nom, prenom, email, telephone) VALUES (:nom, :prenom, :email, :telephone)";
         $stmt = $this->db->prepare($query);
         $stmt->execute([
-            ':name' => $this->name,
+            ':nom' => $this->nom,
+            ':prenom' => $this->prenom,
             ':email' => $this->email,
-            ':phone' => $this->phone,
+            ':telephone' => $this->telephone,
         ]);
     }
 
@@ -61,16 +69,24 @@ class Client
      * cette methode permet de modifier un client existant
      * @return void
      */
-    public function updateClient()
+    public function modifierClient(): void
     {
-        $query = "UPDATE client SET name = :name, email = :email, phone = :phone WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            ':name' => $this->name,
-            ':email' => $this->email,
-            ':phone' => $this->phone,
-            ':id' => $this->id,
-        ]);
+        try {
+            $query = "UPDATE client SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([
+                ':nom' => $this->nom,
+                ':prenom' => $this->prenom,
+                ':email' => $this->email,
+                ':telephone' => $this->telephone,
+                ':id' => $this->id,
+            ]);
+        } catch (PDOException $e) {
+            $message_erreur = "Une erreur de base de données est survenue : " . $e->getMessage();
+
+            // Afficher un message à l'utilisateur
+            $_SESSION['erreur'] = $message_erreur;
+        }
     }
 
     /**
@@ -78,7 +94,7 @@ class Client
      * @param integer $id l'id du client
      * @return \http\Client
      */
-    public function getClientById($id)
+    public function recupererClientParId(int $id)
     {
         $query = "SELECT * FROM client WHERE id = :id";
         $stmt = $this->db->prepare($query);
@@ -91,7 +107,7 @@ class Client
      * @param integer $id l'id du client
      * @return void
      */
-    public function deleteClient($id)
+    public function supprimerClient(int $id): void
     {
         $query = "DELETE FROM client WHERE id = :id";
         $stmt = $this->db->prepare($query);

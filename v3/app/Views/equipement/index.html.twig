@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des équipements</title>
+</head>
+<body>
+<h1>Liste des équipements</h1>
+<ul>
+    {% for equipement in equipements %}
+        <li>{{ equipement.nom|e }} - {{ equipement.etat|e }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

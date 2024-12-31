@@ -23,6 +23,18 @@
         </div>
 
         <div class="mb-4">
+            <label for="code_cours" class="block text-gray-700 font-medium mb-2">Code du cours:</label>
+            <input
+                    type="text"
+                    id="code_cours"
+                    name="code_cours"
+                    value="<?php echo htmlspecialchars($course['code_cours']); ?>"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+        </div>
+
+        <div class="mb-4">
             <label for="nombre_heure" class="block text-gray-700 font-medium mb-2">Nombre d'heures:</label>
             <input
                     type="number"

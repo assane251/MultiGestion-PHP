@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Animal</title>
+</head>
+<body>
+<h1>Create New Animal</h1>
+<form action="/animals/create" method="POST">
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="etat">Etat:</label>
+    <input type="text" id="etat" name="etat" required>
+
+    <label for="disponible">Disponible:</label>
+    <select id="disponible" name="disponible">
+        <option value="1">Oui</option>
+        <option value="2">Non</option>
+    </select>
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

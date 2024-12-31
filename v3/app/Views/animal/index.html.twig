@@ -1,0 +1,15 @@
+<h1>Animals</h1>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Age</th>
+        <th>Health</th>
+    </tr>
+    {% for animal in animals %}
+    <tr>
+        <td>{{ animal.type }}</td>
+        <td>{{ animal.age }}</td>
+        <td>{{ animal.health }}</td>
+    </tr>
+    {% endfor %}
+</table>

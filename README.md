@@ -46,7 +46,7 @@ Gestion-rendez-vous/
 │   ├── models/
 │   │   ├── RendezVous.php
 │   │   ├── Client.php
-│   ├── views/
+│   ├── Views/
 │   │   ├── rendezvous/
 │   │   │   ├── index.php
 │   │   │   ├── create.php
@@ -94,7 +94,7 @@ CREATE TABLE rendez_vous (
 projet-gestion-ferme/
 ├── app/
 │   ├── config/
-│   │   ├── bootstrap.php
+│   │   ├── Bootstrap.php
 │   │   ├── database.php
 │   ├── controllers/
 │   │   ├── AnimalController.php
@@ -102,15 +102,15 @@ projet-gestion-ferme/
 │   ├── models/
 │   │   ├── Animal.php
 │   │   ├── Equipment.php
-│   ├── views/
+│   ├── Views/
 │   │   ├── animal/
-│   │   │   ├── index.twig
-│   │   │   ├── create.twig
-│   │   │   ├── edit.twig
+│   │   │   ├── index.html.twig
+│   │   │   ├── create.html.twig
+│   │   │   ├── edit.html.twig
 │   │   ├── equipment/
-│   │       ├── index.twig
-│   │       ├── create.twig
-│   │       ├── edit.twig
+│   │       ├── index.html.twig
+│   │       ├── create.html.twig
+│   │       ├── edit.html.twig
 ├── public/
 │   ├── index.php
 ├── vendor/

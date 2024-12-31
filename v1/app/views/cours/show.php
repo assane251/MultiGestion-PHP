@@ -18,6 +18,7 @@
         <tr class="bg-gray-200">
             <th class="border border-gray-300 px-4 py-2 text-left">Id</th>
             <th class="border border-gray-300 px-4 py-2 text-left">Nom du cours</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Code du cours</th>
             <th class="border border-gray-300 px-4 py-2 text-left">Nombre d'heures</th>
             <th class="border border-gray-300 px-4 py-2 text-center">Actions</th>
         </tr>
@@ -27,6 +28,7 @@
             <tr class="hover:bg-gray-100">
                 <td class="border border-gray-300 px-4 py-2"><?= $course['id']; ?></td>
                 <td class="border border-gray-300 px-4 py-2"><?= $course['nom_cours']; ?></td>
+                <td class="border border-gray-300 px-4 py-2"><?= $course['code_cours']; ?></td>
                 <td class="border border-gray-300 px-4 py-2"><?= $course['nombre_heure']; ?></td>
                 <td class="border border-gray-300 px-4 py-2 text-center">
                     <a href="?controller=cours&action=modifierCoursController&id=<?= $course['id']; ?>"

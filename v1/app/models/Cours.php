@@ -38,10 +38,10 @@ function recupererCoursParId($id): array
  * @param $nom_nom_cours int nombre du cours
  * @return void
  */
-function ajouterCours($nom_cours, $nombre_heure)
+function ajouterCours($nom_cours, $code_cours, $nombre_heure)
 {
     global $db;
-    $result = pg_query($db, "INSERT INTO cours (nom_cours, nombre_heure) VALUES ('$nom_cours', $nombre_heure)");
+    $result = pg_query($db, "INSERT INTO cours (nom_cours, nombre_heure, code_cours) VALUES ('$nom_cours', $nombre_heure, '$code_cours')");
     if (!$result)
         die("Erreur lors de la création du animal : " . pg_last_error());
 }
@@ -54,10 +54,10 @@ function ajouterCours($nom_cours, $nombre_heure)
  * @param $nombre_heure int nombre du cours
  * @return void retourne rien
  */
-function modifierCours($id, $nom_cours, $nombre_heure)
+function modifierCours($id, $nom_cours, $code_cours, $nombre_heure)
 {
     global $db;
-    $result = pg_query($db, "UPDATE cours SET nom_cours='$nom_cours', nombre_heure=$nombre_heure WHERE id=$id");
+    $result = pg_query($db, "UPDATE cours SET nom_cours='$nom_cours', nombre_heure=$nombre_heure, code_cours='$code_cours' WHERE id=$id");
     if (!$result)
         die("Erreur lors de la modification du animal : " . pg_last_error());
 }
