@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Models\Equipement;
 use Doctrine\ORM\EntityManager;
 
-class EquipementRepository
+class EquipementRepository extends \App\Repository\AnimalRepository
 {
     private EntityManager $entityManager;
 
@@ -19,12 +19,12 @@ class EquipementRepository
         return $this->entityManager->getRepository(Equipement::class)->findAll();
     }
 
-    public function findById(int $id): ?Equipement
+    public function findById(int $id): ?\App\Models\Animal
     {
         return $this->entityManager->getRepository(Equipement::class)->find($id);
     }
 
-    public function create(string $nom, string $etat, bool $disponible): void
+    public function create($nom, $etat, $disponible): void
     {
         $equipement = new Equipement();
         $equipement->setNom($nom);
@@ -35,7 +35,7 @@ class EquipementRepository
         $this->entityManager->flush();
     }
 
-    public function update(int $id, string $nom, string $etat, bool $disponible): bool
+    public function update($id, $nom, $etat, $disponible): bool
     {
         $equipement = $this->findById($id);
 

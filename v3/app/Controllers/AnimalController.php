@@ -24,10 +24,8 @@ class AnimalController
     {
         $animals = $this->animalRepository->findAll();
 
-        return new Response(
-            $this->twig->render('animal/index.html.twig', ['animals' => $animals]),
-            Response::HTTP_OK
-        );
+        $content = $this->twig->render('animal/index.html.twig', ['animals' => $animals]);
+        return new Response($content, Response::HTTP_OK);
     }
 
     public function show(int $id): Response

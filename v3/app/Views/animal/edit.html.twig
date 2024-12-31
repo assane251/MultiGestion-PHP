@@ -16,7 +16,7 @@
     <select id="client_id" name="client_id" required>
         <option value="">Selectionnez un client</option>
         <?php foreach ($clients as $client):?>
-            <option value="<?php echo $client['id'];?>" <?php echo ($client['id'] == $rendezvous['client_id'])?'selected':'';?>><?php echo $client['name'];?></option>
+            <option value="<?php echo $client['id'];?>"> <?php echo ($client['id'] == $rendezvous['client_id'])?'selected':'';?>><?php echo $client['name'];?></option>
         <?php endforeach;?>
     </select>
 

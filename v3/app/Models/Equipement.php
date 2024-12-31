@@ -42,7 +42,7 @@ class Equipement
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(string $nom)
     {
         $this->nom = $nom;
     }
@@ -52,7 +52,7 @@ class Equipement
         return $this->etat;
     }
 
-    public function setEtat(string $etat): self
+    public function setEtat(string $etat)
     {
         $this->etat = $etat;
     }
@@ -62,7 +62,7 @@ class Equipement
         return $this->disponible;
     }
 
-    public function setDisponible(bool $disponible): self
+    public function setDisponible(bool $disponible)
     {
         $this->disponible = $disponible;
     }
@@ -72,7 +72,7 @@ class Equipement
         return $this->animals;
     }
 
-    public function addAnimal(Animal $animal): self
+    public function addAnimal(Animal $animal)
     {
         if (!$this->animals->contains($animal)) {
             $this->animals[] = $animal;
@@ -81,7 +81,7 @@ class Equipement
         return $this;
     }
 
-    public function removeAnimal(Animal $animal): self
+    public function removeAnimal(Animal $animal)
     {
         if ($this->animals->removeElement($animal)) {
             if ($animal->getEquipement() === $this) {

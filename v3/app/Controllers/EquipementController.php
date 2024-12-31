@@ -42,8 +42,14 @@ class EquipementController
         );
     }
 
-    public function show(int $id): Response
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function show(): Response
     {
+        $id = $_GET['id'] ?? null;
         $equipement = $this->equipementRepository->findById($id);
 
         if (!$equipement) {
@@ -59,19 +65,40 @@ class EquipementController
         );
     }
 
-    public function create(string $nom, string $etat, bool $disponible): Response
+    public function create(): Response
     {
-        $this->equipementRepository->create($nom, $etat, $disponible);
+       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+           // Récupère les données du formulaire
+           $nom = $_POST['nom'] ?? null;
+           $etat = $_POST['etat'] ?? null;
+           $disponible = bool($_POST['disponible']);
+
+           // Validation des données
+           if (!$nom || !$etat || $disponible === null) {
+               return new Response(
+                   'Missing required fields.',
+                   Response::HTTP_BAD_REQUEST
+               );
+           }
+
+           $this->equipementRepository->create($nom, $etat, $disponible);
+
+           return new Response(
+               'Equipement created successfully',
+               Response::HTTP_CREATED,
+//               ['Location' => '/equipements']
+           );
+       }
 
         return new Response(
-            'Equipement created successfully',
-            Response::HTTP_CREATED,
-            ['Location' => '/equipements']
+            $this->twig->render('equipement/create.html.twig'),
+            Response::HTTP_OK
         );
     }
 
-    public function edit(int $id, string $nom, string $etat, bool $disponible): Response
+    public function edit(): Response
     {
+        extract($_POST);
         $updated = $this->equipementRepository->update($id, $nom, $etat, $disponible);
 
         if (!$updated) {
@@ -85,8 +112,9 @@ class EquipementController
         );
     }
 
-    public function delete(int $id): Response
+    public function delete(): Response
     {
+        $id = $_GET['id'] ?? null;
         $deleted = $this->equipementRepository->delete($id);
 
         if (!$deleted) {

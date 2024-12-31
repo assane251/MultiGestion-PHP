@@ -46,19 +46,19 @@ class Animal
         return $this->sante;
     }
 
-    public function setType(string $type): self
+    public function setType(string $type)
     {
         $this->type = $type;
         return $this;
     }
 
-    public function setAge($age): self
+    public function setAge($age)
     {
         $this->age = $age;
         return $this;
     }
 
-    public function setSante(string $sante): self
+    public function setSante(string $sante)
     {
         $this->sante = $sante;
         return $this;
@@ -69,7 +69,7 @@ class Animal
         return $this->equipement;
     }
 
-    public function setEquipement(?Equipement $equipement): self
+    public function setEquipement(?Equipement $equipement)
     {
         $this->equipement = $equipement;
         return $this;
