@@ -22,19 +22,21 @@ Ce projet est une application web PHP évoluant en trois versions. Chaque versio
 
 **SQL de la base de données :**
 ```postgresql
-CREATE TABLE etudiants (
-    id SERIAL PRIMARY KEY,
-    nom VARCHAR(255),
-    prenom VARCHAR(255),
-    email VARCHAR(255),
-    filiere VARCHAR(255)
+CREATE TABLE etudiants
+(
+    id      SERIAL PRIMARY KEY,
+    nom     VARCHAR(30) NOT NULL,
+    prenom  VARCHAR(30) NOT NULL,
+    email   VARCHAR(50) NOT NULL,
+    filiere VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE cours (
-    id SERIAL PRIMARY KEY,
-    nom VARCHAR(255),
-    code VARCHAR(50),
-    heures INT
+CREATE TABLE cours
+(
+    id     SERIAL PRIMARY KEY,
+    nom    VARCHAR(50) NOT NULL,
+    code   VARCHAR(50) NOT NULL,
+    heures INT         NOT NULL
 );
 ```
 ```yaml
@@ -75,10 +77,10 @@ Gestion-rendez-vous/
 ```postgresql
 CREATE TABLE clients (
     id SERIAL PRIMARY KEY,
-    nom VARCHAR(255),
-    prenom VARCHAR(255),
-    email VARCHAR(255),
-    telephone VARCHAR(50)
+    nom VARCHAR(25) NOT NULL,
+    prenom VARCHAR(25) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    telephone VARCHAR(11)
 );
 
 CREATE TABLE rendez_vous (
@@ -129,20 +131,22 @@ projet-gestion-ferme/
 **SQL de la base de données :**
 
 ```postgresql
-CREATE TABLE animaux (
-    id SERIAL PRIMARY KEY,
-    type VARCHAR(255) NOT NULL,
-    age INT NOT NULL,
-    sante VARCHAR(255) NOT NULL,
-    idEquipement INT NOT NULL,
-    FOREIGN KEY (idEquipement) REFERENCES equipements(id)
+CREATE TABLE animaux
+(
+    id           SERIAL PRIMARY KEY,
+    type         VARCHAR(10) NOT NULL,
+    age          INT         NOT NULL,
+    sante        VARCHAR(50) NOT NULL,
+    idEquipement INT         NOT NULL,
+    FOREIGN KEY (idEquipement) REFERENCES equipements (id)
 );
 
-CREATE TABLE equipements (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    nom VARCHAR(255) NOT NULL,
-    etat VARCHAR(255) NOT NULL,
-    disponibilite BOOLEAN NOT NULL
+CREATE TABLE equipements
+(
+    id            INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nom           VARCHAR(30) NOT NULL,
+    etat          VARCHAR(30) NOT NULL,
+    disponibilite BOOLEAN     NOT NULL
 );
 ```
 **Installer les dépendances (pour la V3) :**
