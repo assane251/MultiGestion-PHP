@@ -10,7 +10,14 @@ require_once __DIR__ . '/../models/Cours.php';
 function listCoursController()
 {
     $courses = listerTousLesCours();
-    require_once  __DIR__ . '/../views/cours/show.php';
+    require_once  __DIR__ . '/../views/cours/index.php';
+}
+
+function listCoursParId()
+{
+    $id = $_GET['id'] ?? null;
+    $course = recupererCoursParId($id);
+    return __DIR__ . '/../views/cours/show.php';
 }
 
 

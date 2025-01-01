@@ -9,7 +9,7 @@ require_once __DIR__ . '/../models/Etudiant.php';
 function listEtudiantsController()
 {
     $etudiants = listerTousLesEtudiant();
-    require_once  __DIR__ . '/../views/etudiants/show.php';
+    require_once  __DIR__ . '/../views/etudiants/index.php';
 }
 
 

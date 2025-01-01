@@ -53,7 +53,6 @@ class EquipementRepository
             return false;
         }
 
-        $equipement = new Equipement();
         $equipement->setNom($nom);
         $equipement->setEtat($etat);
         $equipement->setDisponible($disponible);

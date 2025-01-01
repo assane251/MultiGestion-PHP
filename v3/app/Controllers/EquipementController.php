@@ -65,8 +65,8 @@ class EquipementController
             $this->equipementRepository->update($id, $nom, $etat, (bool)$disponible);
 
             return new Response(
-                $this->twig->render('equipement/index.html.twig', ['equipement' => $equipement]),
-                Response::HTTP_OK
+                header('Location: index.php?controller=equipement&action=listTousLesEquipements'),
+                Response::HTTP_OK,
             );
         }
 
@@ -186,7 +186,7 @@ class EquipementController
         }
 
         return new Response(
-            $this->twig->render('equipement/index.html.twig', (array)'Equipement deleted successfully'),
+            header('Location: index.php?controller=equipement&action=listTousLesEquipements'),
             Response::HTTP_OK,
         );
     }

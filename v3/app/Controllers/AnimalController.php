@@ -61,9 +61,8 @@ class AnimalController
             $this->animalRepository->update($id, $type, $age, $sante, $eqipementParId ?? null);
 
             return new Response(
-                $this->twig->render('animal/show.html.twig', ['animal' => $animals,
-                    'equipements' => $this->equipementRepository->findAll()]),
-                Response::HTTP_OK
+                header('Location: index.php?controller=animal&action=listTousLesAnimaux'),
+                Response::HTTP_OK,
             );
         }
 
