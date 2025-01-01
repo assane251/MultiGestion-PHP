@@ -38,6 +38,34 @@ class RendezVousController
         require_once __DIR__ . '/../views/rendezvous/create.php';
     }
 
+    public function showRendezvousController()
+    {
+        $id = $_GET['id'] ?? null;
+
+        if ($id) {
+            // Récupérer les détails du rendez-vous
+            $rendezvous = $this->rendezvousModel->recupererendezvousParId($id);
+
+            // Vérifier si le rendez-vous existe
+            if ($rendezvous) {
+                // Récupérer les informations du client associé
+                $client = $this->clientModel->recupererClientParId($rendezvous['client_id']);
+                // Ajouter les informations du client au tableau de rendez-vous
+                $rendezvous['client_nom'] = $client['nom'];
+                $rendezvous['client_prenom'] = $client['prenom'];
+            }
+
+            // Charger la vue pour afficher les détails du rendez-vous
+            require_once __DIR__ . '/../views/rendezvous/show.php';
+        } else {
+            // Si l'ID n'est pas valide, rediriger vers la liste des rendez-vous
+            header('Location: ?controller=rendezvous&action=listRendezvousController');
+            exit;
+        }
+    }
+
+
+
     public function modifierRendezvousController()
     {
         $clients = $this->clientModel->listTousLesClients();

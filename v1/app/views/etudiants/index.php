@@ -35,8 +35,9 @@
                 <td class="border border-gray-300 px-4 py-2"><?= $etudiant['filiere']; ?></td>
                 <td class="border border-gray-300 px-4 py-2 text-center">
                     <a href="?controller=etudiant&action=listEtudiantParId&id=<?= $etudiant['id']; ?>"
-                       class="text-blue-500 hover:underline">Detail
+                       class="text-blue-500 hover:underline">Détails
                     </a>
+
                     <a href="?controller=etudiant&action=modifierEtudiantController&id=<?= $etudiant['id']; ?>"
                        class="text-blue-500 hover:underline">Éditer
                     </a>

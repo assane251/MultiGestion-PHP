@@ -28,10 +28,12 @@
                 <td class="border p-2 text-center"><?= htmlspecialchars($rv['heure']) ?></td>
                 <td class="border p-2 text-center"><?= htmlspecialchars($rv['description']) ?></td>
                 <td class="border p-2 text-center flex space-x-2 justify-center">
-                    <a href="?controller=rendezvous&action=listRendezvousParId&id=<?= $rv['id'] ?>" class="text-blue-500 hover:underline">Detail</a>
+                    <!-- Lien vers la page de détails du rendez-vous -->
+                    <a href="?controller=rendezvous&action=showRendezvousController&id=<?= $rv['id'] ?>" class="text-blue-500 hover:underline">Détails</a>
                     <a href="?controller=rendezvous&action=modifierRendezvousController&id=<?= $rv['id'] ?>" class="text-blue-500 hover:underline">Éditer</a>
-                    <a href="?controller=rendezvous&action=supprimerRendezvousController&id=<?= $rv['id'] ?>" class="text-red-500 hover:underline">Supprimer</a>
+                    <a href="?controller=rendezvous&action=supprimerRendezvousController&id=<?= $rv['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');" class="text-red-500 hover:underline">Supprimer</a>
                 </td>
+
             </tr>
         <?php endforeach; ?>
         </tbody>

@@ -30,10 +30,12 @@
                 <td class="border p-2 text-center"><?= htmlspecialchars($client['email']) ?></td>
                 <td class="border p-2 text-center"><?= htmlspecialchars($client['telephone']) ?></td>
                 <td class="border p-2 flex space-x-2">
-                    <a href="?controller=client&action=listClientParId&id=<?= $client['id'] ?>" class="text-blue-500 hover:underline">Detail</a>
+                    <!-- Lien vers la page de détails du client -->
+                    <a href="?controller=client&action=showClientController&id=<?= $client['id'] ?>" class="text-blue-500 hover:underline">Détails</a>
                     <a href="?controller=client&action=modifierClientController&id=<?= $client['id'] ?>" class="text-blue-500 hover:underline">Éditer</a>
                     <a href="?controller=client&action=supprimerClientController&id=<?= $client['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" class="text-red-500 hover:underline">Supprimer</a>
                 </td>
+
             </tr>
         <?php endforeach; ?>
         </tbody>

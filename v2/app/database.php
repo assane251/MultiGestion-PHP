@@ -7,7 +7,7 @@ class Database
     private string $serveur = "localhost";
     private string $port = "5432";
     private string $user = "postgres";
-    private string $pwd = "Assane45678";
+    private string $pwd = "motdepasse";
     private string $dbname = "db_php_v2";
     private string $dsn;
     private $options = [

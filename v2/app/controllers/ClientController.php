@@ -36,6 +36,24 @@ class ClientController
         }
     }
 
+    public function showClientController()
+    {
+        // Récupérer l'ID du client passé en paramètre de l'URL
+        $id = $_GET['id'] ?? null;
+
+        if ($id) {
+            // Récupérer les détails du client à partir du modèle
+            $client = $this->clientModel->recupererClientParId($id);
+            // Charger la vue pour afficher les détails du client
+            require_once __DIR__ . '/../views/clients/show.php';
+        } else {
+            // Si l'ID n'est pas valide, rediriger vers la liste des clients
+            header('Location: ?controller=client&action=listClientsController');
+            exit;
+        }
+    }
+
+
     public function modifierClientController()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -12,6 +12,23 @@ function listEtudiantsController()
     require_once  __DIR__ . '/../views/etudiants/index.php';
 }
 
+/**
+ * Controller qui affiche les détails d'un étudiant
+ * @return void
+ */
+function listEtudiantParId()
+{
+    $id = $_GET['id'] ?? null;
+    if ($id) {
+        $etudiant = recupererEtudiantParId($id);
+        require_once __DIR__ . '/../views/etudiants/show.php';
+    } else {
+        header('Location: index.php?controller=etudiant&action=listEtudiantsController');
+    }
+}
+
+
+
 
 /**
  * Controller qui affiche le formulaire de création d'un étudiant

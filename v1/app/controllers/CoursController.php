@@ -13,12 +13,27 @@ function listCoursController()
     require_once  __DIR__ . '/../views/cours/index.php';
 }
 
+/**
+ * Controller qui affiche les détails d'un cours
+ * @return void
+ */
 function listCoursParId()
 {
     $id = $_GET['id'] ?? null;
-    $course = recupererCoursParId($id);
-    return __DIR__ . '/../views/cours/show.php';
+
+    if ($id) {
+        $course = recupererCoursParId($id); // Récupérer les détails du cours
+
+        if ($course) {
+            require_once __DIR__ . '/../views/cours/show.php'; // Inclure la vue des détails
+        } else {
+            echo "⚠️ Cours introuvable avec cet identifiant.";
+        }
+    } else {
+        echo "⚠️ Aucun identifiant de cours fourni.";
+    }
 }
+
 
 
 /**

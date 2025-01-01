@@ -32,8 +32,8 @@
                 <td class="border border-gray-300 px-4 py-2"><?= $course['nombre_heure']; ?></td>
                 <td class="border border-gray-300 px-4 py-2 text-center">
                     <a href="?controller=cours&action=listCoursParId&id=<?= $course['id']; ?>"
-                       class="text-blue-500 hover:underline">Detail
-                    </a>
+                       class="text-blue-500 hover:underline">Détails</a>
+
                     <a href="?controller=cours&action=modifierCoursController&id=<?= $course['id']; ?>"
                        class="text-blue-500 hover:underline">Éditer
                     </a>
