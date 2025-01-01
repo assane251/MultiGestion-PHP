@@ -8,8 +8,9 @@ use App\Repository\EquipementRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'equipment';
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'equipement';
+$action = isset($_GET['action']) ? $_GET['action'] : 'listTousLesEquipements'; // Action par défaut
+
 
 // Obtenir la requête actuelle
 //$request = Request::createFromGlobals();
