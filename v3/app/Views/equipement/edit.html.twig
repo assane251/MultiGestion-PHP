@@ -1,29 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifier l'équipement</title>
-</head>
-<body>
-<h1>Modifier l'équipement {{ equipement.id }}</h1>
+{% extends "layout.html.twig" %}
 
-<form action="?controller=equipement&action=modifierEquipement" method="post">
-    <input type="hidden" name="id" value="{{ equipement.id }}">
+{% block title %}Modifier Équipement{% endblock %}
 
-    <label for="nom">Nom:</label>
-    <input type="text" id="nom" name="nom" value="{{ equipement.nom }}" required>
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Modifier Équipement {{ equipement.id }}</h1>
+    <form action="?controller=equipement&action=modifierEquipement" method="post" class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
+        <input type="hidden" name="id" value="{{ equipement.id }}">
 
-    <label for="etat">État:</label>
-    <input type="text" id="etat" name="etat" value="{{ equipement.etat }}" required>
+        <div class="flex flex-col">
+            <label for="nom" class="text-sm font-medium">Nom:</label>
+            <input type="text" id="nom" name="nom" value="{{ equipement.nom }}" required class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
 
-    <label for="disponible">Disponible:</label>
-    <select id="disponible" name="disponible">
-        <option value="1" {% if equipement.disponible %}selected{% endif %}>Oui</option>
-        <option value="0" {% if not equipement.disponible %}selected{% endif %}>Non</option>
-    </select>
+        <div class="flex flex-col">
+            <label for="etat" class="text-sm font-medium">État:</label>
+            <input type="text" id="etat" name="etat" value="{{ equipement.etat }}" required class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
 
-    <button type="submit">Modifier</button>
-    <a href="?controller=equipement&action=listTousLesEquipements">Retour à la liste</a>
-</form>
-</body>
-</html>
+        <div class="flex flex-col">
+            <label for="disponible" class="text-sm font-medium">Disponibilité:</label>
+            <select id="disponible" name="disponible" class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="1" {% if equipement.disponible %}selected{% endif %}>Oui</option>
+                <option value="0" {% if not equipement.disponible %}selected{% endif %}>Non</option>
+            </select>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Modifier</button>
+        </div>
+    </form>
+{% endblock %}

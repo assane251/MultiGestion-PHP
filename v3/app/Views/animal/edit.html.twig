@@ -1,24 +1,49 @@
-<h1>Modifier l'animal {{ animal.id }}</h1>
+{% extends "layout.html.twig" %}
 
-<form action="?controller=animal&action=modifierAnimal" method="post">
-    <input type="hidden" name="id" value="{{ animal.id }}">
+{% block title %}Modifier Animal{% endblock %}
 
-    <label for="type">Type:</label>
-    <input type="text" id="type" name="type" value="{{ animal.type }}" required>
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Modifier l'animal {{ animal.id }}</h1>
 
-    <label for="sante">Sante:</label>
-    <input type="text" id="sante" name="sante" value="{{ animal.sante }}" required>
+    <form action="?controller=animal&action=modifierAnimal" method="post"
+          class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
+        <input type="hidden" name="id" value="{{ animal.id }}">
 
-    <label for="age">Age:</label>
-    <input type="text" id="age" name="age" value="{{ animal.age }}" required>
+        <div class="flex flex-col">
+            <label for="type" class="text-sm font-medium">Type:</label>
+            <input type="text" id="type" name="type" value="{{ animal.type }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
 
-    <label for="equipement_id">Equipement ID:</label>
-    <select id="equipement_id" name="equipement_id">
-        {% for equipement in equipements %}
-            <option value="{{ equipement.id }}" {% if equipement.id == animal.equipement_id %}selected{% endif %}>{{ equipement.nom }}</option>
-        {% endfor %}
-    </select>
+        <div class="flex flex-col">
+            <label for="sante" class="text-sm font-medium">Santé:</label>
+            <input type="text" id="sante" name="sante" value="{{ animal.sante }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
 
-    <button type="submit">Modifier</button>
-    <a href="?controller=equipement&action=listTousLesEquipements">Retour à la liste</a>
-</form>
+        <div class="flex flex-col">
+            <label for="age" class="text-sm font-medium">Âge:</label>
+            <input type="text" id="age" name="age" value="{{ animal.age }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="equipement_id" class="text-sm font-medium">Équipement:</label>
+            <select id="equipement_id" name="equipement_id"
+                    class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% for equipement in equipements %}
+                    <option value="{{ equipement.id }}"
+                            {% if equipement.id == animal.equipement_id %}selected{% endif %}>{{ equipement.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Modifier
+            </button>
+            <a href="?controller=equipement&action=listTousLesEquipements" class="text-blue-500 hover:underline">Retour
+                à la liste</a>
+        </div>
+    </form>
+{% endblock %}
+

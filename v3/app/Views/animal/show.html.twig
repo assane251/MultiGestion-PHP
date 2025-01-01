@@ -1,33 +1,57 @@
-<h1>Details Animal {{ animal.id }}</h1>
-<ul>
-    <li>Type: {{ animal.type }}</li>
-    <li>Age: {{ animal.age }}</li>
-    <li>Santé: {{ animal.sante }}</li>
-    {% for equipement in equipements %}
-        {% if  equipement.id == animal.equipement_id %}
-            <li>Equipement Id: {{ equipement.nom }}</li>
-        {% endif %}
-    {% endfor %}
-</ul>
+{% extends "layout.html.twig" %}
 
-<h2>Mise a jour Animal</h2>
-<form action="?controller=animal&action=listAnimalParId" method="post">
-    <input type="hidden" name="id" value="{{ animal.id }}">
-    <label for="type">Type:</label>
-    <input type="text" id="type" name="type" value="{{ animal.type }}" required>
+{% block title %}Details Animal{% endblock %}
 
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" value="{{ animal.age }}" required>
-
-    <label for="sante">Santé:</label>
-    <input type="text" id="sante" name="sante" value="{{ animal.sante }}" required>
-
-    <label for="equipement_id">Equipement ID:</label>
-    <select id="equipement_id" name="equipement_id">
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Détails Animal {{ animal.id }}</h1>
+    <ul class="list-disc pl-5 space-y-2 bg-gray-100 p-6 rounded-lg shadow-md">
+        <li><span class="font-medium">Type:</span> {{ animal.type }}</li>
+        <li><span class="font-medium">Âge:</span> {{ animal.age }}</li>
+        <li><span class="font-medium">Santé:</span> {{ animal.sante }}</li>
         {% for equipement in equipements %}
-            <option value="{{ equipement.id }}" {% if equipement.id == animal.equipement_id %}selected{% endif %}>{{ equipement.nom }}</option>
+            {% if equipement.id == animal.equipement_id %}
+                <li><span class="font-medium">Équipement:</span> {{ equipement.nom }}</li>
+            {% endif %}
         {% endfor %}
-    </select>
+    </ul>
 
-    <button type="submit">Mise a jour</button>
-</form>
+    <h2 class="text-xl font-bold mt-6 mb-4">Mise à jour Animal</h2>
+    <form action="?controller=animal&action=listAnimalParId" method="post"
+          class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
+        <input type="hidden" name="id" value="{{ animal.id }}">
+
+        <div class="flex flex-col">
+            <label for="type" class="text-sm font-medium">Type:</label>
+            <input type="text" id="type" name="type" value="{{ animal.type }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="age" class="text-sm font-medium">Âge:</label>
+            <input type="number" id="age" name="age" value="{{ animal.age }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="sante" class="text-sm font-medium">Santé:</label>
+            <input type="text" id="sante" name="sante" value="{{ animal.sante }}" required
+                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="equipement_id" class="text-sm font-medium">Équipement:</label>
+            <select id="equipement_id" name="equipement_id"
+                    class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {% for equipement in equipements %}
+                    <option value="{{ equipement.id }}"
+                            {% if equipement.id == animal.equipement_id %}selected{% endif %}>{{ equipement.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Mettre à jour
+            </button>
+        </div>
+    </form>
+{% endblock %}
