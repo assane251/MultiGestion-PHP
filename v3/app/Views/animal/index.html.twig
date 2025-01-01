@@ -1,23 +1,37 @@
-<h1>Liste Animals</h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Age</th>
-        <th>Sante</th>
-        <th>Actions</th>
-    </tr>
-    {% for animal in animals %}
-    <tr>
-        <td>{{ animal.id }}</td>
-        <td>{{ animal.type }}</td>
-        <td>{{ animal.age }}</td>
-        <td>{{ animal.sante }}</td>
-        <td>
-            <a href="?controller=animal&action=listAnimalParId&id={{ animal.id }}">Detail</a>
-            <a href="?controller=animal&action=modifierAnimal&id={{ animal.id }}">Éditer</a>
-            <a href="?controller=animal&action=supprimerAnimal&id={{ animal.id }}">Supprimer</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste des Animaux{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Liste Animals</h1>
+    <table class="table-auto border-collapse border border-gray-300 w-full bg-white shadow-md rounded-lg">
+        <thead class="bg-gray-100">
+        <tr>
+            <th class="border border-gray-300 px-4 py-2">ID</th>
+            <th class="border border-gray-300 px-4 py-2">Type</th>
+            <th class="border border-gray-300 px-4 py-2">Âge</th>
+            <th class="border border-gray-300 px-4 py-2">Santé</th>
+            <th class="border border-gray-300 px-4 py-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr class="hover:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">{{ animal.id }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ animal.type }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ animal.age }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ animal.sante }}</td>
+                <td class="border border-gray-300 px-4 py-2 space-x-2">
+                    <a href="?controller=animal&action=listAnimalParId&id={{ animal.id }}"
+                       class="text-blue-500 hover:underline">Détail</a>
+                    <a href="?controller=animal&action=modifierAnimal&id={{ animal.id }}"
+                       class="text-green-500 hover:underline">Éditer</a>
+                    <a href="?controller=animal&action=supprimerAnimal&id={{ animal.id }}"
+                       class="text-red-500 hover:underline">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

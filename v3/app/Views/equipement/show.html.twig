@@ -1,21 +1,36 @@
-<h1>Details Equipement {{ equipement.id }}</h1>
-<ul>
-    <li>Nom: {{ equipement.nom }}</li>
-    <li>Etat: {{ equipement.etat }}</li>
-    <li>Disponibilité: {{ equipement.disponible }}</li>
-</ul>
+{% extends "layout.html.twig" %}
 
-<h2>Edit Equipement</h2>
-<form action="?controller=equipement&action=listEquipementParId" method="post">
-    <input type="hidden" name="id" value="{{ equipement.id }}">
-    <label for="nom">Nom:</label>
-    <input type="text" id="nom" name="nom" value="{{ equipement.nom }}" required>
+{% block title %}Détails Équipement{% endblock %}
 
-    <label for="etat">Etat:</label>
-    <input type="text" id="etat" name="etat" value="{{ equipement.etat }}" required>
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Détails Équipement {{ equipement.id }}</h1>
+    <ul class="list-disc pl-5 space-y-2 bg-gray-100 p-6 rounded-lg shadow-md">
+        <li><span class="font-medium">Nom:</span> {{ equipement.nom }}</li>
+        <li><span class="font-medium">État:</span> {{ equipement.etat }}</li>
+        <li><span class="font-medium">Disponibilité:</span> {{ equipement.disponible }}</li>
+    </ul>
 
-    <label for="disponible">Disponibilite:</label>
-    <input type="text" id="disponible" name="disponible" value="{{ equipement.disponible }}" required>
+    <h2 class="text-xl font-bold mt-6 mb-4">Modifier Équipement</h2>
+    <form action="?controller=equipement&action=listEquipementParId" method="post" class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
+        <input type="hidden" name="id" value="{{ equipement.id }}">
 
-    <button type="submit">Mise a jour</button>
-</form>
+        <div class="flex flex-col">
+            <label for="nom" class="text-sm font-medium">Nom:</label>
+            <input type="text" id="nom" name="nom" value="{{ equipement.nom }}" required class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="etat" class="text-sm font-medium">État:</label>
+            <input type="text" id="etat" name="etat" value="{{ equipement.etat }}" required class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="disponible" class="text-sm font-medium">Disponibilité:</label>
+            <input type="text" id="disponible" name="disponible" value="{{ equipement.disponible }}" required class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Mettre à jour</button>
+        </div>
+    </form>
+{% endblock %}

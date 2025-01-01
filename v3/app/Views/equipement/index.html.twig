@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des équipements</title>
-</head>
-<body>
-<h1>Liste des équipements</h1>
-<ul>
-    {% for equipement in equipements %}
-        <li>{{ equipement.nom|e }} - {{ equipement.etat|e }}</li>
-        <a href="?controller=equipement&action=listEquipementParId&id={{ equipement.id }}">Detail</a>
-        <a href="?controller=equipement&action=modifierEquipement&id={{ equipement.id }}">Éditer</a>
-        <a href="?controller=equipement&action=supprimerEquipement&id={{ equipement.id }}">Supprimer</a>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste des Équipements{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Liste des Équipements</h1>
+    <ul class="list-disc pl-5 space-y-2 bg-gray-100 p-6 rounded-lg shadow-md">
+        {% for equipement in equipements %}
+            <li>
+                <span class="font-medium">{{ equipement.nom }}</span> - {{ equipement.etat }}
+                <div class="space-x-4">
+                    <a href="?controller=equipement&action=listEquipementParId&id={{ equipement.id }}" class="text-blue-500 hover:underline">Détail</a>
+                    <a href="?controller=equipement&action=modifierEquipement&id={{ equipement.id }}" class="text-green-500 hover:underline">Éditer</a>
+                    <a href="?controller=equipement&action=supprimerEquipement&id={{ equipement.id }}" class="text-red-500 hover:underline">Supprimer</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
