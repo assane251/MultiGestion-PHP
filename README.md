@@ -75,7 +75,7 @@ Gestion-rendez-vous/
 
 **SQL de la base de données :**
 ```postgresql
-CREATE TABLE clients (
+CREATE TABLE client (
     id SERIAL PRIMARY KEY,
     nom VARCHAR(25) NOT NULL,
     prenom VARCHAR(25) NOT NULL,
@@ -83,13 +83,13 @@ CREATE TABLE clients (
     telephone VARCHAR(11)
 );
 
-CREATE TABLE rendez_vous (
+CREATE TABLE rendezvous (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     heure TIME NOT NULL,
     description TEXT NOT NULL,
     client_id INT NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES clients(id)
+    FOREIGN KEY (client_id) REFERENCES client(id)
 );
 ```
 ```yaml
