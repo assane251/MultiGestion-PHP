@@ -1,18 +1,29 @@
-<?php if (!empty($client)): ?>
-<h1>Modifier l'etudiant <?= $client['id'] ?></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier l'équipement</title>
+</head>
+<body>
+<h1>Modifier l'équipement {{ equipement.id }}</h1>
 
-<form action="?controller=client&action=editClientController" method="post">
-    <input type="hidden" name="id" value="<?php echo htmlspecialchars($client['id']); ?>">
-    <label for="name">Nom:</label>
-    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($client['name']); ?>" required>
+<form action="?controller=equipement&action=modifierEquipement" method="post">
+    <input type="hidden" name="id" value="{{ equipement.id }}">
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($client['email']); ?>" required>
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" value="{{ equipement.nom }}" required>
 
-    <label for="phone">Phone:</label>
-    <input type="tel" id="phone" name="phone" value="<?php echo htmlspecialchars($client['phone']); ?>" required>
+    <label for="etat">État:</label>
+    <input type="text" id="etat" name="etat" value="{{ equipement.etat }}" required>
+
+    <label for="disponible">Disponible:</label>
+    <select id="disponible" name="disponible">
+        <option value="1" {% if equipement.disponible %}selected{% endif %}>Oui</option>
+        <option value="0" {% if not equipement.disponible %}selected{% endif %}>Non</option>
+    </select>
 
     <button type="submit">Modifier</button>
-    <a href="?controller=client&action=listClientsController">Retour à la liste</a>
+    <a href="?controller=equipement&action=listTousLesEquipements">Retour à la liste</a>
 </form>
-<?php endif; ?>
+</body>
+</html>

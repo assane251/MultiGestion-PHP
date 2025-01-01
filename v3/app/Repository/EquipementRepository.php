@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Models\Equipement;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
-class EquipementRepository extends \App\Repository\AnimalRepository
+class EquipementRepository
 {
     private EntityManager $entityManager;
 
@@ -19,11 +21,15 @@ class EquipementRepository extends \App\Repository\AnimalRepository
         return $this->entityManager->getRepository(Equipement::class)->findAll();
     }
 
-    public function findById(int $id): ?\App\Models\Animal
+    public function findById(int $id): ?Equipement
     {
         return $this->entityManager->getRepository(Equipement::class)->find($id);
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function create($nom, $etat, $disponible): void
     {
         $equipement = new Equipement();
@@ -35,6 +41,10 @@ class EquipementRepository extends \App\Repository\AnimalRepository
         $this->entityManager->flush();
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function update($id, $nom, $etat, $disponible): bool
     {
         $equipement = $this->findById($id);
@@ -43,6 +53,7 @@ class EquipementRepository extends \App\Repository\AnimalRepository
             return false;
         }
 
+        $equipement = new Equipement();
         $equipement->setNom($nom);
         $equipement->setEtat($etat);
         $equipement->setDisponible($disponible);
@@ -52,6 +63,10 @@ class EquipementRepository extends \App\Repository\AnimalRepository
         return true;
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function delete(int $id): bool
     {
         $equipement = $this->findById($id);

@@ -24,13 +24,14 @@ $entityManager = (new Bootstrap())::getEntityManager();
 
 // Routage simple
 switch ($controller) {
-    case 'animals':
+    case 'animal':
         $animalRepository = new AnimalRepository($entityManager);
-        $animalController = new AnimalController($animalRepository);
+        $equipementRepository = new EquipementRepository($entityManager);
+        $animalController = new AnimalController($animalRepository, $equipementRepository);
         if (method_exists($animalController, $action)) {
             $response = $animalController->$action();
 //            echo $response->send();
-//            echo $response->getContent();
+            echo $response->getContent();
         }
         else
             die("L'action '$action' n'exite pas");
@@ -42,7 +43,7 @@ switch ($controller) {
         $equipementController = new EquipementController($equipementRepository); // Correct controller
         if (method_exists($equipementController, $action)) {
             $response = $equipementController->$action();
-            echo $response;
+            echo $response->getContent();
         } else {
             die("L'action '$action' n'existe pas");
         }

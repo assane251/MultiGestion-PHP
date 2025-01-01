@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Animal</title>
+    <title>Nouveau Equipement</title>
 </head>
 <body>
-<h1>Create New Animal</h1>
-<form action="/animals/create" method="POST">
+<h1>Nouveau Equipement</h1>
+<form action="?controller=equipement&action=ajouterEquipement" method="POST">
     <label for="nom">Nom:</label>
     <input type="text" id="nom" name="nom" required>
 
@@ -18,7 +18,7 @@
         <option value="2">Non</option>
     </select>
 
-    <button type="submit">Create</button>
+    <button type="submit">Creer un equipement</button>
 </form>
 </body>
 </html>

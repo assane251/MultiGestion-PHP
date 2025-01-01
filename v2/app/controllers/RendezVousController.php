@@ -18,7 +18,7 @@ class RendezVousController
     public function listRendezvousController()
     {
         $rendezvous = $this->rendezvousModel->listTousLesRendezvous();
-        require_once __DIR__ . '/../views/rendezvous/show.php';
+        require_once __DIR__ . '/../views/rendezvous/index.php';
     }
 
     public function ajouterRendezvousController()

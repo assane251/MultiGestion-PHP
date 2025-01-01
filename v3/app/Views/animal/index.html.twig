@@ -1,15 +1,23 @@
-<h1>Animals</h1>
+<h1>Liste Animals</h1>
 <table>
     <tr>
+        <th>ID</th>
         <th>Type</th>
         <th>Age</th>
-        <th>Health</th>
+        <th>Sante</th>
+        <th>Actions</th>
     </tr>
     {% for animal in animals %}
     <tr>
+        <td>{{ animal.id }}</td>
         <td>{{ animal.type }}</td>
         <td>{{ animal.age }}</td>
-        <td>{{ animal.health }}</td>
+        <td>{{ animal.sante }}</td>
+        <td>
+            <a href="?controller=animal&action=listAnimalParId&id={{ animal.id }}">Detail</a>
+            <a href="?controller=animal&action=modifierAnimal&id={{ animal.id }}">Éditer</a>
+            <a href="?controller=animal&action=supprimerAnimal&id={{ animal.id }}">Supprimer</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

@@ -15,7 +15,7 @@ class ClientController
     public function listClientsController()
     {
         $clients = $this->clientModel->listTousLesClients();
-        require_once __DIR__ . '/../views/clients/show.php';
+        require_once __DIR__ . '/../views/clients/index.php';
     }
 
     public function ajouterClientController()

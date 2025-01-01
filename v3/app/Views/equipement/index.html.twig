@@ -9,6 +9,9 @@
 <ul>
     {% for equipement in equipements %}
         <li>{{ equipement.nom|e }} - {{ equipement.etat|e }}</li>
+        <a href="?controller=equipement&action=listEquipementParId&id={{ equipement.id }}">Detail</a>
+        <a href="?controller=equipement&action=modifierEquipement&id={{ equipement.id }}">Éditer</a>
+        <a href="?controller=equipement&action=supprimerEquipement&id={{ equipement.id }}">Supprimer</a>
     {% endfor %}
 </ul>
 </body>

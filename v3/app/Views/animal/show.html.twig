@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Animal Details</title>
-</head>
-<body>
-<h1>Details of Animal {{ animal.id }}</h1>
+<h1>Details Animal {{ animal.id }}</h1>
 <ul>
     <li>Type: {{ animal.type }}</li>
     <li>Age: {{ animal.age }}</li>
     <li>Santé: {{ animal.sante }}</li>
+    {% for equipement in equipements %}
+        {% if  equipement.id == animal.equipement_id %}
+            <li>Equipement Id: {{ equipement.nom }}</li>
+        {% endif %}
+    {% endfor %}
 </ul>
 
-<h2>Edit Animal</h2>
-<form action="/animals/{{ animal.id }}/edit" method="POST">
+<h2>Mise a jour Animal</h2>
+<form action="?controller=animal&action=listAnimalParId" method="post">
+    <input type="hidden" name="id" value="{{ animal.id }}">
     <label for="type">Type:</label>
     <input type="text" id="type" name="type" value="{{ animal.type }}" required>
 
@@ -22,7 +22,12 @@
     <label for="sante">Santé:</label>
     <input type="text" id="sante" name="sante" value="{{ animal.sante }}" required>
 
-    <button type="submit">Update</button>
+    <label for="equipement_id">Equipement ID:</label>
+    <select id="equipement_id" name="equipement_id">
+        {% for equipement in equipements %}
+            <option value="{{ equipement.id }}" {% if equipement.id == animal.equipement_id %}selected{% endif %}>{{ equipement.nom }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Mise a jour</button>
 </form>
-</body>
-</html>

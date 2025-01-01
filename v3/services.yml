@@ -1,8 +1,0 @@
-services:
-  App\Controller\:
-    resource: './app/Controller'
-    tags: ['controller.service_arguments']
-
-    animal_index:
-      path: /animal
-      controller: App\Controller\AnimalController::index

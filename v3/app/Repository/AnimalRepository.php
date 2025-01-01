@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Models\Animal;
+use App\Models\Equipement;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
 class AnimalRepository
 {
@@ -16,11 +19,7 @@ class AnimalRepository
 
     public function findAll(): array
     {
-        //return $this->entityManager->getRepository(Animal::class)->findAll();
-        return [
-            ['id' => 1, 'type' => 'Chat', 'age' => 2, 'sante' => 'Bonne'],
-            ['id' => 2, 'type' => 'Chien', 'age' => 4, 'sante' => 'Excellente'],
-        ];
+        return $this->entityManager->getRepository(Animal::class)->findAll();
     }
 
     public function findById(int $id): ?Animal
@@ -28,18 +27,27 @@ class AnimalRepository
         return $this->entityManager->getRepository(Animal::class)->find($id);
     }
 
-    public function create(string $type, int $age, string $sante): void
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function create(string $type, int $age, string $sante, $equipement_id): void
     {
         $animal = new Animal();
         $animal->setType($type);
         $animal->setAge($age);
         $animal->setSante($sante);
+        $animal->setEquipement($equipement_id);
 
         $this->entityManager->persist($animal);
         $this->entityManager->flush();
     }
 
-    public function update(int $id, string $type, int $age, string $sante): bool
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function update(int $id, string $type, int $age, string $sante, Equipement $equipement_id): bool
     {
         $animal = $this->findById($id);
 
@@ -50,12 +58,17 @@ class AnimalRepository
         $animal->setType($type);
         $animal->setAge($age);
         $animal->setSante($sante);
+        $animal->setEquipement($equipement_id);
 
         $this->entityManager->flush();
 
         return true;
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function delete(int $id): bool
     {
         $animal = $this->findById($id);

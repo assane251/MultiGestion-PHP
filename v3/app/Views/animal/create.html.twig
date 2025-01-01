@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Create Animal</title>
-</head>
-<body>
-<h1>Create New Animal</h1>
-<form action="/animals/create" method="POST">
+<h1>Nouveau Animal</h1>
+<form action="?controller=animal&action=ajouterAnimal" method="post">
+
     <label for="type">Type:</label>
-    <input type="text" id="type" name="type" required>
+    <input type="text" id="type" name="type" required><br />
+
+    <label for="sante">Sante:</label>
+    <input type="text" id="sante" name="sante" required><br />
 
     <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
+    <input type="number" id="age" name="age" required><br />
 
-    <label for="sante">Santé:</label>
-    <input type="text" id="sante" name="sante" required>
-
-    <button type="submit">Create</button>
+    <label for="equipement_id">Equipement:</label>
+    <select id="equipement_id" name="equipement_id">
+        {% for equipement in equipements %}
+            <option value="{{ equipement.id }}">{{ equipement.nom }}</option>
+        {% endfor %}
+    </select><br />
+    <button type="submit">Creer animal</button>
+    <a href="?controller=animal&action=listTousLesAnimaux">Retour à la liste</a>
 </form>
-</body>
-</html>
