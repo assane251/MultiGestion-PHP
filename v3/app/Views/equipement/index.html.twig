@@ -4,6 +4,10 @@
 
 {% block content %}
     <h1 class="text-2xl font-bold mb-4">Liste des Équipements</h1>
+
+    <!-- Bouton pour ajouter un équipement -->
+    <a href="?controller=equipement&action=ajouterEquipement" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Ajouter un équipement</a>
+
     <ul class="list-disc pl-5 space-y-2 bg-gray-100 p-6 rounded-lg shadow-md">
         {% for equipement in equipements %}
             <li>
