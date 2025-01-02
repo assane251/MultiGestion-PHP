@@ -1,9 +1,9 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Ajouter Animal{% endblock %}
+{% block title %}Ajouter un animal{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl font-bold mb-4">Nouveau Animal</h1>
+    <h1 class="text-2xl font-bold mb-4">Nouvel Animal</h1>
     <form action="?controller=animal&action=ajouterAnimal" method="post"
           class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="flex flex-col">
-            <label for="sante" class="text-sm font-medium">Sante:</label>
+            <label for="sante" class="text-sm font-medium">Santé:</label>
             <input type="text" id="sante" name="sante" required
                    class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
@@ -42,44 +42,6 @@
                 liste</a>
         </div>
     </form>
-    <h1 class="text-2xl font-bold mb-4">Nouveau Animal</h1>
-    <form action="?controller=animal&action=ajouterAnimal" method="post"
-          class="space-y-4 bg-gray-100 p-6 rounded-lg shadow-md">
 
-        <div class="flex flex-col">
-            <label for="type" class="text-sm font-medium">Type:</label>
-            <input type="text" id="type" name="type" required
-                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
-
-        <div class="flex flex-col">
-            <label for="sante" class="text-sm font-medium">Sante:</label>
-            <input type="text" id="sante" name="sante" required
-                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
-
-        <div class="flex flex-col">
-            <label for="age" class="text-sm font-medium">Age:</label>
-            <input type="number" id="age" name="age" required
-                   class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
-
-        <div class="flex flex-col">
-            <label for="equipement_id" class="text-sm font-medium">Equipement:</label>
-            <select id="equipement_id" name="equipement_id"
-                    class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                {% for equipement in equipements %}
-                    <option value="{{ equipement.id }}">{{ equipement.nom }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="flex items-center space-x-4">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Créer animal
-            </button>
-            <a href="?controller=animal&action=listTousLesAnimaux" class="text-blue-500 hover:underline">Retour à la
-                liste</a>
-        </div>
-    </form>
 {% endblock %}
 
